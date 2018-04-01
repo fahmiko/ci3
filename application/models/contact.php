@@ -2,21 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Contact extends CI_Model {
-
-    function test()
-    {
-        return 'Data untuk test model';
-    }
-    
     public function get_contact(){
-        $nama = $array['nama'];
-        $email= $array['email'];
-        $telp = $array['telp'];
-        $pesan= $array['pesan'];
-        $data = 'Nama :'.$nama.'<br />'.
-                'Email:'.$email.'<br />'.
-                'Telp :'.$telp.'<br />'.
-                'Pesan:'.$pesan;
+        $data = array(
+        'title' => array('Tugas2' => 'VI','Tugas3'),
+        'nama' => 'Fahmiko Purnama Putra',
+        'alamat' => 'Malang');  
         return $data;
     }
 }

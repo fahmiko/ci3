@@ -23,9 +23,8 @@ class Welcome extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 	public function home(){
-		$this->load->view('home');
-	}
-	public function login(){
-		$this->load->view('login');
+		$this->load->model('Link');
+		$link = $this->Link->get_link();
+		$this->load->view('home',$link,FALSE);
 	}
 }
