@@ -52,3 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['blogger/baca-artikel/(:num)'] = 'blogger/view/(:any)';
+$route['blogger/edit/(:num)'] = 'blogger/edit/(:any)';
+$route['blogger/delete/(:num)'] = 'blogger/delete/(:any)';
+$route['blogger/page/(:num)'] = 'blogger/index/(:any)';
+$route['blogger/page'] = 'blogger/index/(:any)';
+?>

@@ -11,14 +11,14 @@
     <title>Resume - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/icon/devicons/css/devicons.min.css" rel="stylesheet">
+    <link href="assets/icon/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="assets/css/resume.min.css" rel="stylesheet">
@@ -46,6 +46,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#education">Pendidikan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="blogger">Blog Saya</a>
           </li>
         </ul>
       </div>
@@ -153,11 +156,11 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="assets/js/resume.min.js"></script>

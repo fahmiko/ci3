@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Prsmodel extends CI_Model {
 	public function getInformation(){	
 		$data = array(
