@@ -1,4 +1,3 @@
-<div class="col-sm-9">
 <?php
 	foreach ($artikel['select']->result_array() as $row){
 ?>
@@ -16,7 +15,7 @@
 	</div>
     <p><a href="<?php echo site_url('blogger/baca-artikel/'.$row['id'])?>" class="btn btn-default">Lanjutkan =></a> 
        <a href="<?php echo site_url('blogger/edit/'.$row['id'])?>" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-       <a href="<?php echo site_url('blogger/delete/'.$row['id']) ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+       <a href="<?php echo site_url('blogger/delete/'.$row['id'])?>" class="btn btn-danger" onclick="return confirm('ingin hapus postingan ?')" ><span class="glyphicon glyphicon-trash"></span></a>
     </p>
       <br>
        <?php
@@ -26,8 +25,6 @@
     <?php
       echo $pagination;
     ?>
-</div>
-
 
 <?php
 // foreach ($artikel->result_array() as $row)

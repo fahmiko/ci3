@@ -1,4 +1,3 @@
-<div class="col-sm-9">
  <h4><small>POST</small></h4>
  <hr>
 	<div class="panel panel-default">
@@ -17,6 +16,4 @@
   	<div class="panel panel-default">
     	<div class="panel-body"><b>Article</b><p><?php echo $show_article['artikel'] ?></p></div>
   	</div>
-</div>
-
 </div>

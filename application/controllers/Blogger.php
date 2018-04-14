@@ -26,7 +26,7 @@ class Blogger extends CI_Controller {
 		$config['per_page'] = 2;//menampilkan jumlah artikel per halaman
 		$config['uri_segment'] = 3;//menghitung segmentasi url
 		$config['num_links'] = 2;
-    	$config['full_tag_open'] = '<div><ul class="pagination">';
+    	$config['full_tag_open'] = '<div><ul class="pagination">';//menyisipkan style bootstrap untuk pagination
     	$config['full_tag_close'] = '</ul></div>';
     	$config['prev_link'] = '&lt; Prev';
     	$config['prev_tag_open'] = '<li>';
@@ -53,13 +53,17 @@ class Blogger extends CI_Controller {
 		$this->load->view('blogger/footer');
 	}
 
+	public function coba(){
+		$data['artikel'] = $this->Artikel->get_article(0);
+		echo var_dump($data['artikel']);
+	}
 
 	public function view(){
 		$id = $this->uri->segment(3); //mengambil variabel dari url
 		$data['show_article'] = $this->Artikel->get_article_by_id($id);//menyimpan hasil dari filtering data
 		// Jika data tidak ditemukan akan di arahkan ke page 404
 		if(empty($data['show_article'])){
-			show_404();
+			show_404();//menampilkan error page jika artikel tidak ditemukan
 		}
 		//Meload View
 		$this->load->view('blogger/header');
@@ -83,16 +87,16 @@ class Blogger extends CI_Controller {
 			$this->load->view('blogger/create');
 			$this->load->view('blogger/footer');
 		} else {
-			$config['upload_path'] = 'assets/img/';
-			$config['allowed_types'] = 'jpg|png|jpeg';
+			//Konfigurasi upload file
+			$config['upload_path'] = 'assets/img/';//direktori tempat upload file
+			$config['allowed_types'] = 'jpg|png|jpeg';//file yang diperbolehkan
 			
-			$this->load->library('upload', $config);
+			$this->load->library('upload', $config);//menyimpan konfigurasi
 			
-			if ( ! $this->upload->do_upload('userfile')){
-				$error = array('error' => $this->upload->display_errors());
-				print_r($error);
-			}
-			else{
+			if ( ! $this->upload->do_upload('userfile')){//Jika file gagal terupload
+				$error = array('error' => $this->upload->display_errors());//menampilkan pesan error
+				print_r($error);//print array pesan error
+			}else{
 				$data = array('upload_data' => $this->upload->data());
 				// Data input ke model
 				$data['input'] = array(

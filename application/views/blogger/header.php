@@ -2,42 +2,25 @@
 <html>
 <head>
 	<title>My Blog</title>
-	<link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-	<style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;} 
-    }
-  </style>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo base_url().'assets/css/style-navbar.css'?>">
 </head>
 <body>
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
-      <h4>Fahmiko - CodeIgniter</h4>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="<?php echo base_url().'blogger'?>">Home</a></li>
-        <li><a href="<?php echo site_url('blogger/create')?>">Artikel Baru</a></li>
-        <li><a href="<?php echo base_url().'personal'?>">Tentang Saya</a></li>
-      </ul><br>
-    </div>
+<div id="wrapper" class="active">
+  <div id="sidebar-wrapper">
+    <ul id="sidebar_menu" class="sidebar-nav">
+        <li class="sidebar-brand"><a id="menu-toggle" href="#">Fahmiko | CI<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+    </ul>
+    <ul class="sidebar-nav" id="sidebar">     
+      <li><a href="<?php echo site_url().'blogger'?>">Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+      <li><a href="<?php echo site_url().'blogger/create'?>">Tambah Artikel<span class="sub_icon glyphicon glyphicon-list-alt"></span></a></li>
+      <li><a href="<?php echo site_url().'personal'?>">Kontak<span class="sub_icon glyphicon glyphicon glyphicon-user"></span></a></li>
+      
+    </ul>
+  </div>    
+<div id="page-content-wrapper">
+<!-- Keep all page content within the page-content inset div! -->
+<div class="page-content inset">
+<div class="row">
+<div class="col-md-12">
