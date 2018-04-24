@@ -9,41 +9,20 @@ class Blogger extends CI_Controller {
 		parent::__construct();
 		//Load model dan helper
 		$this->load->model('Artikel');
-		$this->load->helper('url_helper','date','file','pagination');
+		$this->load->helper('url_helper','date','file','form','blog_helper');
+		$this->load->library('form_validation','pagination');
 		date_default_timezone_set('Asia/Jakarta');
 	}
 
 	public function index()
 	{
+		$this->load->library('pagination');
+		$this->load->helper('blog_helper');
 		//Memanggil fungsi menampilkan semua tabel artikel
 		$url = $this->uri->segment(3);//mengambil kode untuk segmentasi paging
 		$data['artikel'] = $this->Artikel->get_article($url);//ambil data dari Model
-		$this->load->library('pagination');//menggunakan libraly paginatin
-		$paging = $data['artikel']['getRows'];//mengambil jumlah baris dari tabel
-		//Membuat konfig untuk pagination (optional)
-		$config['base_url'] = 'http://localhost/ci3/blogger/page';//url untuk pagination
-		$config['total_rows'] = $paging;//total baris
-		$config['per_page'] = 2;//menampilkan jumlah artikel per halaman
-		$config['uri_segment'] = 3;//menghitung segmentasi url
-		$config['num_links'] = 2;
-    	$config['full_tag_open'] = '<div><ul class="pagination">';//menyisipkan style bootstrap untuk pagination
-    	$config['full_tag_close'] = '</ul></div>';
-    	$config['prev_link'] = '&lt; Prev';
-    	$config['prev_tag_open'] = '<li>';
-    	$config['prev_tag_close'] = '</li>';
-    	$config['next_link'] = 'Next &gt;';
-    	$config['next_tag_open'] = '<li>';
-    	$config['next_tag_close'] = '</li>';
-    	$config['cur_tag_open'] = '<li class="active"><a href="#">';
-    	$config['cur_tag_close'] = '</a></li>';
-    	$config['num_tag_open'] = '<li>';
-    	$config['num_tag_close'] = '</li>';
-    	$config['first_link'] = 'First';
-    	$config['first_tag_open'] = '<li>';
-    	$config['first_tag_close'] = '</li>';
-    	$config['last_link'] = 'Last';
-    	$config['last_tag_open'] = '<li>';
-    	$config['last_tag_close'] = '</li>';
+		$paging = $data['artikel']['getRows'];
+		$config = pagination_config($paging);
     	//instansiasi paging
 		$this->pagination->initialize($config);
 		//meload view
@@ -51,11 +30,6 @@ class Blogger extends CI_Controller {
 		$data['pagination'] = $this->pagination->create_links();
 		$this->load->view('blogger/tampil_blog', $data);
 		$this->load->view('blogger/footer');
-	}
-
-	public function coba(){
-		$data['artikel'] = $this->Artikel->get_article(0);
-		echo var_dump($data['artikel']);
 	}
 
 	public function view(){
@@ -72,14 +46,10 @@ class Blogger extends CI_Controller {
 	}
 
 	public function create(){
-		//Meload helper form dan form valudasi
-		$this->load->helper('form');
+		$this->load->helper('blog_helper');
 		$this->load->library('form_validation');
-		//validasi inputan yang masuk
-		$this->form_validation->set_rules('title', 'Title', 'required');
-		$this->form_validation->set_rules('artikel', 'Artikel', 'required');
-		$this->form_validation->set_rules('author', 'Author', 'required');
-  
+		$config = validation_article($this->input->post('title'));
+		$this->form_validation->set_rules($config);
 		//Jika validasi belum berjalan
 		if ($this->form_validation->run() == FALSE) {
 			//Meload View tambah artikel
@@ -115,12 +85,10 @@ class Blogger extends CI_Controller {
 	}
 
 	public function edit(){
-		$this->load->helper('form');
+		$this->load->helper('blog_helper');
 		$this->load->library('form_validation');
-		//validasi inputan yang masuk
-		$this->form_validation->set_rules('title', 'title', 'required');
-		$this->form_validation->set_rules('artikel', 'artikel', 'required');
-		$this->form_validation->set_rules('author', 'Author', 'required');
+		$config = validation_article($this->input->post('title'));
+		$this->form_validation->set_rules($config);
 
 		//Mendapatkan key id dati Route
 		$id = $this->uri->segment(3);
@@ -143,6 +111,11 @@ class Blogger extends CI_Controller {
 				print_r($error);
 			}
 			else{
+				if(file_exists('./assets/img/'.$data['show_article']['gambar'])){
+					unlink('./assets/img/'.$data['show_article']['gambar']);
+				}else{
+					redirect('blogger','refresh');
+				}
 				$data = array('upload_data' => $this->upload->data());
 				// Data input ke model
 				$data['input'] = array(
@@ -152,10 +125,6 @@ class Blogger extends CI_Controller {
 					'gambar' => $this->upload->data('file_name'),
 					'tanggal' => date("Y/m/d")
 				);
-				//Delete Gambar sebelumnya
-				// $file = $this->Artikel->get_article_by_id($id);
-				// $data['delete_upload'] = base_url().'assets/img/'.$file['gambar'];
-				// unlink($path);
 				//query Edit Data
 				$this->Artikel->set_article($id,$data['input']);
 				//kembali ke home
@@ -165,8 +134,14 @@ class Blogger extends CI_Controller {
 	}
 	public function delete(){
 		$id = $this->uri->segment(3);
-		$this->Artikel->delete_article($id);
-		redirect('blogger','refresh');
+		$data['show_article'] = $this->Artikel->get_article_by_id($id);
+		if(file_exists('./assets/img/'.$data['show_article']['gambar'])){
+			unlink('./assets/img/'.$data['show_article']['gambar']);
+			$this->Artikel->delete_article($id);
+			redirect('blogger','refresh');
+		}else{
+			echo "Gagal";
+		}
 	}
 }
 
