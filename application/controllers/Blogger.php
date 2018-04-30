@@ -8,26 +8,41 @@ class Blogger extends CI_Controller {
 		//Membuat kelas parent agar bisa digunakan di semua fungsi
 		parent::__construct();
 		//Load model dan helper
-		$this->load->model('Artikel');
-		$this->load->helper('url_helper','date','file','form','blog_helper');
-		$this->load->library('form_validation','pagination');
+		$this->load->model(array('Artikel','data_kategori'));
+		$this->load->helper(array('blog_helper','file','form','url'));
+		$this->load->library(array('form_validation','pagination'));
 		date_default_timezone_set('Asia/Jakarta');
 	}
 
 	public function index()
 	{
-		$this->load->library('pagination');
-		$this->load->helper('blog_helper');
 		//Memanggil fungsi menampilkan semua tabel artikel
 		$url = $this->uri->segment(3);//mengambil kode untuk segmentasi paging
-		$data['artikel'] = $this->Artikel->get_article($url);//ambil data dari Model
-		$paging = $data['artikel']['getRows'];
-		$config = pagination_config($paging);
-    	//instansiasi paging
-		$this->pagination->initialize($config);
-		//meload view
+
+		$column = $this->input->post('kolom');
+		$order = $this->input->post('urutan');
+		$search = $this->input->post('cari');
+		// Jika pencarian terpilih
+		if(isset($search)){
+			//ambil data dari Model dengan fungsi filtering
+			$data['artikel'] = $this->Artikel->get_article_filter(null, null, $search);	
+		// Jika Sorting terpilih
+		}else if(isset($column) && isset($order)){
+			//ambil data dari Model dengan fungsi filtering
+			$data['artikel'] = $this->Artikel->get_article_filter($column, $order, null);
+		}else{
+			// Jika searching atau filtering tidak terpilih(index)
+			$data['artikel'] = $this->Artikel->get_article($url);//ambil data dari Model
+			$paging = $data['artikel']['getRows'];//Ambbil jumlah baris pada tabel
+			$config = pagination_config($paging);//Anmbil konfigurasi pada helpers/blog_helper
+
+    		//instansiasi paging
+			$this->pagination->initialize($config);
+			$data['pagination'] = $this->pagination->create_links();
+			//meload view
+		}
+
 		$this->load->view('blogger/header');
-		$data['pagination'] = $this->pagination->create_links();
 		$this->load->view('blogger/tampil_blog', $data);
 		$this->load->view('blogger/footer');
 	}
@@ -46,15 +61,20 @@ class Blogger extends CI_Controller {
 	}
 
 	public function create(){
-		$this->load->helper('blog_helper');
-		$this->load->library('form_validation');
-		$config = validation_article($this->input->post('title'));
+		//Ambil data dropdown pada model kategori
+		$data['dropdown'] = $this->data_kategori->dropdown();
+		$config = validation_article();
 		$this->form_validation->set_rules($config);
+		$this->form_validation->set_rules('title', 'Title', 'required|is_unique[personal_blog.title]',
+				array(
+              		'required' 	=> 'Judul Kosong',
+					'is_unique' => 'Judul sudah ada !'
+				));
 		//Jika validasi belum berjalan
 		if ($this->form_validation->run() == FALSE) {
 			//Meload View tambah artikel
 			$this->load->view('blogger/header');
-			$this->load->view('blogger/create');
+			$this->load->view('blogger/create',$data);
 			$this->load->view('blogger/footer');
 		} else {
 			//Konfigurasi upload file
@@ -71,8 +91,9 @@ class Blogger extends CI_Controller {
 				// Data input ke model
 				$data['input'] = array(
 					'title' => $this->input->post('title'),
-					'artikel' => $this->input->post('artikel'),
+					'id_kategori' => $this->input->post('kategori'),
 					'author' => $this->input->post('author'),
+					'artikel' => $this->input->post('artikel'),
 					'gambar' => $this->upload->data('file_name'),
 					'tanggal' => date("Y/m/d")
 				);
@@ -85,11 +106,14 @@ class Blogger extends CI_Controller {
 	}
 
 	public function edit(){
-		$this->load->helper('blog_helper');
-		$this->load->library('form_validation');
+		//Ambil data dropdown pada model kategori
+		$data['dropdown'] = $this->data_kategori->dropdown();
 		$config = validation_article($this->input->post('title'));
 		$this->form_validation->set_rules($config);
-
+		$this->form_validation->set_rules('title', 'Title', 'required',
+				array(
+                	'required' 	=> 'Judul Kosong'
+				));
 		//Mendapatkan key id dati Route
 		$id = $this->uri->segment(3);
 		//Mengambil data dari model dan di filter dan ditambahkan ke dalam array
@@ -120,6 +144,7 @@ class Blogger extends CI_Controller {
 				// Data input ke model
 				$data['input'] = array(
 					'title' => $this->input->post('title'),
+					'id_kategori' => $this->input->post('kategori'),
 					'author' => $this->input->post('author'),
 					'artikel' => $this->input->post('artikel'),
 					'gambar' => $this->upload->data('file_name'),

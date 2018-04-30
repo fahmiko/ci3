@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>My Blog</title>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url().'assets/css/style-navbar.css'?>">
 </head>
@@ -14,6 +14,7 @@
     </ul>
     <ul class="sidebar-nav" id="sidebar">     
       <li><a href="<?php echo site_url().'blogger'?>">Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+      <li><a href="<?php echo site_url().'kategori'?>">Kategori<span class="sub_icon glyphicon glyphicon-list"></span></a></li>
       <li><a href="<?php echo site_url().'blogger/create'?>">Tambah Artikel<span class="sub_icon glyphicon glyphicon-list-alt"></span></a></li>
       <li><a href="<?php echo site_url().'personal'?>">Kontak<span class="sub_icon glyphicon glyphicon glyphicon-user"></span></a></li>
       

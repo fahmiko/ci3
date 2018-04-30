@@ -15,7 +15,6 @@
 </html>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -28,3 +27,16 @@
         $("#wrapper").toggleClass("active");
 });
 </script>
+<!-- 
+<script type="text/javascript">
+function sortArticle(sort){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+            if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                document.getElementById("selectSort").innerHTML = xmlhttp.responseText;    
+            }
+    };
+    xmlhttp.open("GET","Blogger/sorting_article/" +sort,true);
+    xmlhttp.send();
+}
+</script> -->

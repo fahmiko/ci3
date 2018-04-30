@@ -8,6 +8,10 @@
 	<input type="text" class="form-control" name="title" placeholder="Title Article" value="<?php echo $show_article['title'] ?>"><br>
 </div><br>
 <div class="input-group">
+ 	<span class="input-group-addon" id="basic-addon1">Kategori</span>
+	<?php echo form_dropdown('kategori', $dropdown, set_value('kategori',$show_article['id_kategori']), 'class="form-control" required' ); ?>
+</div><br>
+<div class="input-group">
  	<span class="input-group-addon" id="basic-addon1">Author</span>
 	<input type="text" class="form-control" name="author" placeholder="ex:john" value="<?php echo $show_article['author'] ?>"><br>
 </div><br>
