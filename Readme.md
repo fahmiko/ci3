@@ -2,7 +2,7 @@
 
 ------------
 
-Tugas 5
+**Tugas 5**
 Menambahakan form validation client, dan serverside
 1. Tambahkan kode set_value() pada form view
 ```html
@@ -26,3 +26,15 @@ echo form_open_multipart('blogger/create', array('class' => 'needs-validation', 
 1. Menambahkan `time_ago()` pada posting artikel
 1. Filtering data
 1. Sorting data
+
+------------
+
+**Tugas 7**
+1. Menambahkan Pagination pada tampil kategori
+1. Menambahkan datatable menggunakan ajax datasource
+
+*Referensi*
+
+[Ajax Datatable](https://datatables.net/examples/data_sources/ajax.html "Ajax Datatable")
+
+[StackOverflow](https://stackoverflow.com/questions/37394866/display-data-using-json-in-datatables-codeigniter?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa "StackOverflow")

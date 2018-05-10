@@ -13,8 +13,10 @@
 </div>
 </body>
 </html>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!-- Optional theme -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- Datatable Libraly -->
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -27,8 +29,8 @@
         $("#wrapper").toggleClass("active");
 });
 </script>
-<!-- 
-<script type="text/javascript">
+
+<!-- <script type="text/javascript">
 function sortArticle(sort){
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function(){
@@ -39,4 +41,47 @@ function sortArticle(sort){
     xmlhttp.open("GET","Blogger/sorting_article/" +sort,true);
     xmlhttp.send();
 }
-</script> -->
+</script>
+ -->
+
+ <!-- Datatable Get Table -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dt_kategori').DataTable({
+            "ajax": "<?php echo base_url().'blogger/json_kategori'?>",
+            "columns" :[
+                {"data": "id_kategori"},
+                {"data": "nama"},
+                {"data": "deskripsi"},
+                { 
+                    "data" : null,
+                    "render": function (data) {
+                        return '<a href="<?php echo base_url('kategori/edit/') ?>'+ data.id_kategori + '" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a> <a href="<?php echo base_url('kategori/delete/') ?>'+ data.id_kategori + '" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>' 
+                    }
+                },
+
+            ],
+        });
+    } );
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dt_artikel').DataTable({
+            "ajax": "<?php echo base_url().'blogger/json_artikel'?>",
+            "columns" :[
+                {"data": "id"},
+                {"data": "title"},
+                {"data": "author"},
+                {"data": "tanggal"},
+                { 
+                    "data" : null,
+                    "render": function (data) {
+                        return '<a href="<?php echo base_url('blogger/edit/') ?>'+ data.id + '" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a> <a href="<?php echo base_url('blogger/delete/') ?>'+ data.id + '" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>' 
+                    }
+                },
+
+            ],
+        });
+    } );
+</script>

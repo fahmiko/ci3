@@ -34,7 +34,7 @@ class Blogger extends CI_Controller {
 			// Jika searching atau filtering tidak terpilih(index)
 			$data['artikel'] = $this->Artikel->get_article($url);//ambil data dari Model
 			$paging = $data['artikel']['getRows'];//Ambbil jumlah baris pada tabel
-			$config = pagination_config($paging);//Anmbil konfigurasi pada helpers/blog_helper
+			$config = pagination_config($paging,'blogger/page');//Anmbil konfigurasi pada helpers/blog_helper
 
     		//instansiasi paging
 			$this->pagination->initialize($config);
@@ -167,6 +167,22 @@ class Blogger extends CI_Controller {
 		}else{
 			echo "Gagal";
 		}
+	}
+
+	public function json_kategori(){
+		$result = $this->data_kategori->get_data_category();
+		echo json_encode(array("data" => $result->result()));
+	}
+
+	public function json_artikel(){
+		$result = $this->Artikel->get_data_article();
+		echo json_encode(array("data" => $result->result()));	
+	}
+
+	public function view_datatable(){
+		$this->load->view('blogger/header');
+		$this->load->view('datatable_view');
+		$this->load->view('blogger/footer');
 	}
 }
 

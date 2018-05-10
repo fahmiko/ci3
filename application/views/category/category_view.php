@@ -2,7 +2,7 @@
 <hr class="">
 <div class="container">
     <div class="row" style="margin-right: 30px;">
-    	<?php foreach ($kategori->result() as $data) {?>
+    	<?php foreach ($kategori['select']->result() as $data) {?>
         <div class="col-md-6">
             <div class="thumbnail">
                 <div class="caption">
@@ -19,9 +19,12 @@
                 </div>
             </div>
         </div>
-        <?php }?>
+        <?php } ?>
     </div>
     <!--/row-->
+<div class="container">
+  <?php echo "<p style='margin-left:100px'>".$pagination."</p>"?>
+</div>
 <?php
   if(validation_errors()){
     echo "<div class='alert alert-danger'>

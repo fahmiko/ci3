@@ -58,4 +58,6 @@ $route['blogger/edit/(:num)'] = 'blogger/edit/(:any)';
 $route['blogger/delete/(:num)'] = 'blogger/delete/(:any)';
 $route['blogger/page/(:num)'] = 'blogger/index/(:any)';
 $route['blogger/page'] = 'blogger/index/(:any)';
+$route['kategori/page/(:num)'] = 'kategori/index/(:any)';
+$route['kategori/page'] = 'kategori/index/(:any)';
 ?>

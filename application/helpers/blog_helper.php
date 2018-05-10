@@ -47,8 +47,8 @@ function validation_article(){
 	// 			'required' => 'Author masih kosong'
 	// 		));
 	}
-function pagination_config($paging){
-	$config['base_url'] = 'http://localhost/ci3/blogger/page';//url untuk pagination
+function pagination_config($paging,$url){
+	$config['base_url'] = base_url().$url;//url untuk pagination
 	$config['total_rows'] = $paging;//total baris
 	$config['per_page'] = 2;//menampilkan jumlah artikel per halaman
 	$config['uri_segment'] = 3;//menghitung segmentasi url

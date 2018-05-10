@@ -21,6 +21,10 @@ class Artikel extends CI_Model {
      	return $query;
      }
 
+     public function get_data_article(){
+        return $this->db->get('personal_blog');
+     }
+
      public function get_article_filter($column, $order, $search){
         $query['select'] = $this->db->select('*')
                                 ->from('personal_blog')

@@ -7,13 +7,20 @@ class Kategori extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('data_kategori');
-		$this->load->helper(array('form','url'));
-		$this->load->library('form_validation');
+		$this->load->helper(array('form','url','blog'));
+		$this->load->library(array('form_validation','pagination'));
 	}
 
 	public function index()
 	{
-		$data['kategori'] = $this->data_kategori->get_data_category();
+		$url = $this->uri->segment(3);
+		$data['kategori'] = $this->data_kategori->get_data_category_paging($url);//ambil data dari Model
+		$paging = $data['kategori']['getRows'];//Ambbil jumlah baris pada tabel
+		$config = pagination_config($paging,'kategori/page');//Anmbil konfigurasi pada helpers/blog_helper
+
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+
 		$this->load->view('blogger/header');
 		$this->load->view('category/category_view',$data);
 		$this->load->view('blogger/footer');

@@ -8,6 +8,15 @@ class Data_kategori extends CI_Model {
 		$this->load->database();
 	}
 	
+	public function get_data_category_paging($offset){
+		$query['select'] = $this->db->select('*')
+                            ->from('kategori')
+                            ->limit(2,$offset)
+                            ->get();
+        $rows = $this->db->get('kategori');
+        $query['getRows'] = $rows->num_rows();
+     	return $query;
+	}
 	public function get_data_category(){
 		return $this->db->get('kategori');
 	}
