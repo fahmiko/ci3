@@ -7,8 +7,11 @@ class Kategori extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('data_kategori');
-		$this->load->helper(array('form','url','blog'));
-		$this->load->library(array('form_validation','pagination'));
+		$this->load->helper(array('blog'));
+		if($this->session->userdata('username') == null){
+			$this->session->set_flashdata('include_login','Please Login');
+			redirect('user','refresh');
+		}
 	}
 
 	public function index()

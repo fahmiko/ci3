@@ -11,14 +11,15 @@
 <div id="wrapper" class="active">
   <div id="sidebar-wrapper">
     <ul id="sidebar_menu" class="sidebar-nav">
-        <li class="sidebar-brand"><a id="menu-toggle" href="#">Fahmiko | CI<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+        <li class="sidebar-brand"><a id="menu-toggle" href="#"><?=$this->session->userdata('username')?> | CI<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
     </ul>
     <ul class="sidebar-nav" id="sidebar">     
       <li><a href="<?php echo site_url().'blogger'?>">Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
       <li><a href="<?php echo site_url().'kategori'?>">Kategori<span class="sub_icon glyphicon glyphicon-list"></span></a></li>
       <li><a href="<?php echo site_url().'blogger/create'?>">Tambah Artikel<span class="sub_icon glyphicon glyphicon-list-alt"></span></a></li>
       <li><a href="<?php echo site_url().'blogger/view_datatable'?>">Datatable<span class="sub_icon glyphicon glyphicon glyphicon-book"></span></a></li>
-      <li><a href="<?php echo site_url().'personal'?>">Kontak<span class="sub_icon glyphicon glyphicon glyphicon-user"></span></a></li>
+      <li><a href="<?php echo site_url().'personal'?>">About<span class="sub_icon glyphicon glyphicon glyphicon-user"></span></a></li>
+      <li><a href="<?php echo site_url().'user/logout'?>">Logout<span class="sub_icon glyphicon glyphicon glyphicon-log-out"></span></a></li>
       
     </ul>
   </div>    

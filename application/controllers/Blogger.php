@@ -9,9 +9,13 @@ class Blogger extends CI_Controller {
 		parent::__construct();
 		//Load model dan helper
 		$this->load->model(array('Artikel','data_kategori'));
-		$this->load->helper(array('blog_helper','file','form','url'));
+		$this->load->helper(array('blog_helper'));
 		$this->load->library(array('form_validation','pagination'));
 		date_default_timezone_set('Asia/Jakarta');
+		if($this->session->userdata('username') == null){
+			$this->session->set_flashdata('include_login','Please Login');
+			redirect('user','refresh');
+		}
 	}
 
 	public function index()
