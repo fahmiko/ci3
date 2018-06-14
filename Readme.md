@@ -38,3 +38,18 @@ echo form_open_multipart('blogger/create', array('class' => 'needs-validation', 
 [Ajax Datatable](https://datatables.net/examples/data_sources/ajax.html "Ajax Datatable")
 
 [StackOverflow](https://stackoverflow.com/questions/37394866/display-data-using-json-in-datatables-codeigniter?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa "StackOverflow")
+
+------------
+**Tugas 8**
+1. Menambahkan login dan register
+2. Cek Login
+3. Penerapan session flashdata
+
+------------
+**Tugas 9**
+1. Penerapan session userdata untuk masing masing level
+1. Admin dapat ***CRUD***
+1. Operatori hanya bisa ***create dan update***
+1. Member hanya bisa melakukan ***read***
+
+

@@ -12,7 +12,7 @@ class Blogger extends CI_Controller {
 		$this->load->helper(array('blog_helper'));
 		$this->load->library(array('form_validation','pagination'));
 		date_default_timezone_set('Asia/Jakarta');
-		if($this->session->userdata('username') == null){
+		if($this->session->userdata('level') == null){
 			$this->session->set_flashdata('include_login','Please Login');
 			redirect('user','refresh');
 		}
@@ -65,6 +65,10 @@ class Blogger extends CI_Controller {
 	}
 
 	public function create(){
+		if($this->session->userdata('level') == 2){
+			$this->session->set_flashdata('msg_level','Member tidak dapat melakukan tambah artikel');
+			redirect('blogger','refresh');
+		}
 		//Ambil data dropdown pada model kategori
 		$data['dropdown'] = $this->data_kategori->dropdown();
 		$config = validation_article();
@@ -110,6 +114,10 @@ class Blogger extends CI_Controller {
 	}
 
 	public function edit(){
+		if($this->session->userdata('level') == 2){
+			$this->session->set_flashdata('msg_level','Member tidak dapat melakukan edit artikel');
+			redirect('blogger','refresh');
+		}
 		//Ambil data dropdown pada model kategori
 		$data['dropdown'] = $this->data_kategori->dropdown();
 		$config = validation_article($this->input->post('title'));
@@ -162,6 +170,11 @@ class Blogger extends CI_Controller {
 		}	
 	}
 	public function delete(){
+		if($this->session->userdata('level') != 0 ){
+			$this->session->set_flashdata('msg_level','Member/Operator tidak dapat menghapus artikel');
+			redirect('blogger','refresh');
+		}
+
 		$id = $this->uri->segment(3);
 		$data['show_article'] = $this->Artikel->get_article_by_id($id);
 		if(file_exists('./assets/img/'.$data['show_article']['gambar'])){

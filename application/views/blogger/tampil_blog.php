@@ -31,6 +31,14 @@
   <!-- Menutup form searching -->
   <?php echo form_close(); ?>
 </div>
+<?php
+  if($this->session->flashdata('msg_level')){
+    echo "<hr>
+      <div class='alert alert-warning'>
+        <strong>Danger!</strong><br>".$this->session->flashdata('msg_level')."
+      </div>";
+  }
+?>
 <hr>
 <?php 
   // Jika artikel tidak ditemukan tampilkan pesan "DATA TIDAK DITEMUKAN"

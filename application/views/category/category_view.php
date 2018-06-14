@@ -1,5 +1,13 @@
 <h4><small>Category</small></h4>
-<hr class="">
+<?php
+  if($this->session->flashdata('msg_level')){
+    echo "<hr>
+      <div class='alert alert-warning'>
+        <strong>Danger!</strong><br>".$this->session->flashdata('msg_level')."
+      </div>";
+  }
+?>
+<hr>
 <div class="container">
     <div class="row" style="margin-right: 30px;">
     	<?php foreach ($kategori['select']->result() as $data) {?>

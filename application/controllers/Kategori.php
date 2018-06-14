@@ -8,7 +8,7 @@ class Kategori extends CI_Controller {
 		parent::__construct();
 		$this->load->model('data_kategori');
 		$this->load->helper(array('blog'));
-		if($this->session->userdata('username') == null){
+		if($this->session->userdata('level') == null){
 			$this->session->set_flashdata('include_login','Please Login');
 			redirect('user','refresh');
 		}
@@ -30,6 +30,11 @@ class Kategori extends CI_Controller {
 	}
 
 	public function create(){
+		if($this->session->userdata('level') == 2){
+			$this->session->set_flashdata('msg_level','Member tidak dapat melakukan tambah kategori');
+			redirect('kategori','refresh');
+		}
+
 		$this->form_validation->set_rules('nama', 'Nama', 'required|is_unique[kategori.nama]');
 		$this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|min_length[5]');
 
@@ -49,6 +54,11 @@ class Kategori extends CI_Controller {
 	}
 
 	public function edit(){
+		if($this->session->userdata('level') == 2){
+			$this->session->set_flashdata('msg_level','Member tidak dapat melakukan edit kategori');
+			redirect('kategori','refresh');
+		}
+
 		$id = $this->uri->segment(3);
 		$data['kategori'] = $this->data_kategori->get_data_category_by_id($id);
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -69,6 +79,11 @@ class Kategori extends CI_Controller {
 	}
 
 	public function delete(){
+		if($this->session->userdata('level') != 0 ){
+			$this->session->set_flashdata('msg_level','Member/Operator tidak dapat menghapus kategori');
+			redirect('kategori','refresh');
+		}
+
 		$id = $this->uri->segment(3);
 		$this->data_kategori->delete_kategori($id);
 		redirect('Kategori','refresh');

@@ -14,7 +14,7 @@ class Data_user extends CI_Model {
 		);
 		$this->db->where('username', $object['username']);
 		$this->db->where('password', $object['password']);
-		$this->db->select('id_user, username, nama, kode_pos, email');
+		$this->db->select('id_user, username, nama, kode_pos, email, level');
 		$this->session->set_userdata($this->db->get('users')->row_array());
 		return $this->db->get('users')->num_rows();
 	}
