@@ -52,4 +52,9 @@ echo form_open_multipart('blogger/create', array('class' => 'needs-validation', 
 1. Operatori hanya bisa ***create dan update***
 1. Member hanya bisa melakukan ***read***
 
-
+------------
+**Tugas 10**
+Membedakan tampilan label dari masing masing tipe user
+1. Admin dengan badge berwarna kuning
+2. Operator dengan badge berwarna biru
+3. Member dengan badge berwarna putih

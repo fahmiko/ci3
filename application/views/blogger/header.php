@@ -11,7 +11,18 @@
 <div id="wrapper" class="active">
   <div id="sidebar-wrapper">
     <ul id="sidebar_menu" class="sidebar-nav">
-        <li class="sidebar-brand"><a id="menu-toggle" href="#"><?=$this->session->userdata('username')?> | CI<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+        <li class="sidebar-brand"><a id="menu-toggle" href="#">
+          <?php 
+          //Jika login sebagai admin
+          if($this->session->userdata('level') == 0){
+            echo "<font color='yellow'>".$this->session->userdata('username')."</font>";
+          }else if ($this->session->userdata('level') == 1) {
+            echo "<font color='blue'>".$this->session->userdata('username')."</font>";
+          }else{
+            echo "<font color='white'>".$this->session->userdata('username')."</font>";
+          }
+          ?>
+           | CI<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
     </ul>
     <ul class="sidebar-nav" id="sidebar">     
       <li><a href="<?php echo site_url().'blogger'?>">Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
